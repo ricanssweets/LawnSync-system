@@ -11,7 +11,9 @@
   <meta name="apple-mobile-web-app-title" content="LawnSync">
   <meta name="description" content="Gestión profesional y bitácora de fertilización para césped St. Augustine">
 
-  <link rel="manifest" id="manifest-placeholder">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%23070b14'/%3E%3Ctext x='50%25' y='52%25' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='100' fill='%23ffffff'%3ELawn%3Ctspan fill='%2365c200'%3ESync%3C/tspan%3E%3C/text%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%23070b14'/%3E%3Ctext x='50%25' y='52%25' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='100' fill='%23ffffff'%3ELawn%3Ctspan fill='%2365c200'%3ESync%3C/tspan%3E%3C/text%3E%3C/svg%3E">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -29,12 +31,6 @@
               800: '#166534',
               900: '#064e3b',
               accent: '#65c200'
-            },
-            surface: {
-              cardLight: '#ffffff',
-              cardDark: '#0f172a',
-              borderLight: '#e2e8f0',
-              borderDark: '#1e293b'
             }
           },
           fontFamily: {
@@ -64,10 +60,8 @@
     }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    
     details > summary { list-style: none; }
     details > summary::-webkit-details-marker { display: none; }
-    
     .glass-header {
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(16px);
@@ -80,43 +74,16 @@
 </head>
 <body class="bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-slate-100 font-sans antialiased min-h-full flex flex-col transition-colors duration-300">
 
-  <script>
-    const manifest = {
-      name: "LawnSync · Bitácora de Césped",
-      short_name: "LawnSync",
-      start_url: "./index.html",
-      display: "standalone",
-      background_color: "#070b14",
-      theme_color: "#064e3b",
-      icons: [{
-        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%23064e3b'/%3E%3Cpath d='M160 352c0-80 64-144 144-144h48v48c0 80-64 144-144 144h-48v-48z' fill='%2386efac'/%3E%3Cpath d='M352 160c0 80-64 144-144 144h-48v-48c0-80 64-144 144-144h48v48z' fill='%2365c200'/%3E%3C/svg%3E",
-        sizes: "512x512",
-        type: "image/svg+xml",
-        purpose: "any maskable"
-      }]
-    };
-    const blob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
-    document.getElementById('manifest-placeholder').setAttribute('href', URL.createObjectURL(blob));
-  </script>
-
-  <!-- Encabezado Estilo Barra Nativa -->
   <header class="w-full glass-header border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
     <div class="max-w-2xl mx-auto px-4 py-3.5 sm:px-6">
       <div class="flex items-center justify-between gap-3">
         
         <div class="flex items-center gap-3">
-          <div class="relative group cursor-pointer" onclick="triggerLogoUpload()" title="Toca para cambiar logo">
-            <div id="app-logo-container" class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-950 via-slate-900 to-emerald-900 flex items-center justify-center text-white shadow-md ring-1 ring-emerald-500/30 overflow-hidden group-active:scale-95 transition-transform">
-              <svg id="default-logo" class="w-6 h-6 text-[#65c200]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.4 19 2c1 2 2 4.12 2 7 0 6-5 11-10 11z"/>
-                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
-              </svg>
-              <img id="custom-logo-img" class="w-full h-full object-cover hidden" alt="Custom Logo">
-            </div>
-            <div class="absolute -bottom-1 -right-1 bg-emerald-600 text-white p-0.5 rounded-full shadow-md">
-              <i data-lucide="sparkles" class="w-2.5 h-2.5"></i>
-            </div>
-            <input type="file" id="logo-input" accept="image/*" class="hidden" onchange="handleCustomLogo(event)">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-950 via-slate-900 to-emerald-900 flex items-center justify-center text-white shadow-md ring-1 ring-emerald-500/30 overflow-hidden">
+            <svg class="w-6 h-6 text-[#65c200]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.4 19 2c1 2 2 4.12 2 7 0 6-5 11-10 11z"/>
+              <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+            </svg>
           </div>
 
           <div>
@@ -146,7 +113,6 @@
     </div>
   </header>
 
-  <!-- Banner Dinámico de Estado -->
   <div id="banner-alert" class="max-w-2xl mx-auto px-4 mt-4 hidden w-full">
     <div id="banner-inner" class="p-4 rounded-2xl flex items-start gap-3.5 shadow-sm border transition-all">
       <div id="banner-icon" class="p-2.5 rounded-xl shrink-0 mt-0.5"></div>
@@ -157,10 +123,7 @@
     </div>
   </div>
 
-  <!-- Contenedor Principal -->
   <main class="max-w-2xl mx-auto px-4 py-5 flex-1 w-full space-y-4">
-    
-    <!-- Filtros Segmentados Táctiles -->
     <div class="flex items-center justify-between gap-2">
       <div class="flex items-center bg-slate-200/70 dark:bg-slate-900/90 p-1 rounded-2xl border border-slate-200/60 dark:border-slate-800 text-xs font-semibold no-scrollbar overflow-x-auto w-full sm:w-auto shadow-inner">
         <button onclick="setFilter('all')" id="filter-all" class="filter-btn px-3.5 py-1.5 rounded-xl transition-all font-bold bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm whitespace-nowrap">Todos</button>
@@ -174,11 +137,9 @@
       </button>
     </div>
 
-    <!-- Lista de Tratamientos -->
     <div class="space-y-3.5" id="timeline-container"></div>
   </main>
 
-  <!-- Pie de página -->
   <footer class="mt-auto border-t border-slate-200/70 dark:border-slate-800/80 bg-white/50 dark:bg-slate-900/50 py-4 text-center text-xs text-slate-500 dark:text-slate-400">
     <div class="max-w-2xl mx-auto px-4 flex items-center justify-center gap-2 font-display font-medium">
       <i data-lucide="shield-check" class="w-4 h-4 text-[#65c200]"></i>
@@ -245,13 +206,6 @@
       if (saved) {
         try { store = JSON.parse(saved); } catch(e) { store = {}; }
       }
-      const customLogo = localStorage.getItem('lawnsync_custom_logo');
-      if (customLogo) {
-        document.getElementById('default-logo').classList.add('hidden');
-        const img = document.getElementById('custom-logo-img');
-        img.src = customLogo;
-        img.classList.remove('hidden');
-      }
     }
 
     function saveStore() {
@@ -288,22 +242,6 @@
         activeBtn.classList.remove('text-slate-600', 'dark:text-slate-400');
       }
       render();
-    }
-
-    function triggerLogoUpload() { document.getElementById('logo-input').click(); }
-    function handleCustomLogo(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          localStorage.setItem('lawnsync_custom_logo', e.target.result);
-          document.getElementById('default-logo').classList.add('hidden');
-          const img = document.getElementById('custom-logo-img');
-          img.src = e.target.result;
-          img.classList.remove('hidden');
-        };
-        reader.readAsDataURL(file);
-      }
     }
 
     function initDarkMode() {
@@ -418,7 +356,7 @@
             </div>
             
             <div class="flex items-center gap-1.5">
-              <button onclick="downloadCalendar(${safeObj})" class="p-1.5 rounded-lg text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Añadir a Google / Apple Calendar">
+              <button onclick="downloadCalendar(${safeObj})" class="p-1.5 rounded-lg text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Añadir a Calendario">
                 <i data-lucide="calendar-plus" class="w-4 h-4"></i>
               </button>
               <span class="text-[10px] font-bold tracking-wide px-2.5 py-0.5 rounded-full ${config.badgeBg}">
@@ -490,7 +428,7 @@
         const dias = Math.round((toDate(nextUpcoming.start[0], nextUpcoming.start[1]) - hoy) / 86400000);
         if (dias <= 10) {
           banner.classList.remove('hidden');
-          bannerInner.className = 'p-4 rounded-2xl flex items-start gap-3 shadow-md bg-amber-50 dark:bg-[#231704] border border-amber-300 dark:border-amber-700/80 transition-colors';
+          bannerInner.className = 'p-4 rounded-2xl flex items-start gap-3.5 shadow-md bg-amber-50 dark:bg-[#231704] border border-amber-300 dark:border-amber-700/80 transition-colors';
           bannerTitle.className = 'text-xs font-bold uppercase tracking-wider mb-0.5 text-amber-950 dark:text-amber-400';
           bannerText.className = 'text-sm font-semibold text-amber-950 dark:text-slate-100 leading-snug';
           bannerIcon.className = 'p-2 rounded-xl shrink-0 mt-0.5 bg-amber-600 text-white shadow-sm';
@@ -529,14 +467,9 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        const swCode = `
-          const CACHE_NAME = 'lawnsync-v6';
-          self.addEventListener('install', e => e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(['./']))));
-          self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
-        `;
-        const blob = new Blob([swCode], {type: 'application/javascript'});
-        const swUrl = URL.createObjectURL(blob);
-        navigator.serviceWorker.register(swUrl).catch(err => console.log('SW error', err));
+        navigator.serviceWorker.register('./sw.js')
+          .then(() => console.log('PWA Service Worker listo'))
+          .catch((err) => console.log('SW Error:', err));
       });
     }
 
@@ -546,4 +479,3 @@
   </script>
 </body>
 </html>
-
