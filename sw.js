@@ -1,8 +1,9 @@
-const CACHE_NAME = 'lawnsync-pwa-v1';
+const CACHE_NAME = 'lawnsync-pwa-v2';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
+  './icon.png',
   'https://cdn.tailwindcss.com',
   'https://unpkg.com/lucide@latest',
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap'
@@ -31,4 +32,3 @@ self.addEventListener('fetch', (e) => {
     caches.match(e.request).then((res) => res || fetch(e.request))
   );
 });
-
