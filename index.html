@@ -5,15 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>LawnSync · Bitácora Inteligente de Aplicaciones</title>
   
-  <meta name="theme-color" content="#064e3b">
+  <meta name="theme-color" content="#032813">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="LawnSync">
   <meta name="description" content="Gestión profesional y bitácora de fertilización para césped St. Augustine">
 
+  <!-- Iconos vinculados a tu archivo icon.png -->
   <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%23070b14'/%3E%3Ctext x='50%25' y='52%25' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='100' fill='%23ffffff'%3ELawn%3Ctspan fill='%2365c200'%3ESync%3C/tspan%3E%3C/text%3E%3C/svg%3E">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%23070b14'/%3E%3Ctext x='50%25' y='52%25' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='100' fill='%23ffffff'%3ELawn%3Ctspan fill='%2365c200'%3ESync%3C/tspan%3E%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -79,11 +80,9 @@
       <div class="flex items-center justify-between gap-3">
         
         <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-950 via-slate-900 to-emerald-900 flex items-center justify-center text-white shadow-md ring-1 ring-emerald-500/30 overflow-hidden">
-            <svg class="w-6 h-6 text-[#65c200]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.4 19 2c1 2 2 4.12 2 7 0 6-5 11-10 11z"/>
-              <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
-            </svg>
+          <!-- Tu imagen oficial icon.png como logo -->
+          <div class="w-11 h-11 rounded-2xl overflow-hidden shadow-md ring-1 ring-emerald-500/30 shrink-0 bg-slate-900">
+            <img src="icon.png" alt="LawnSync Logo" class="w-full h-full object-cover">
           </div>
 
           <div>
