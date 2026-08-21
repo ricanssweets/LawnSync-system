@@ -75,12 +75,17 @@
 </head>
 <body class="bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-slate-100 font-sans antialiased min-h-full flex flex-col transition-colors duration-300">
 
+  <!-- Toast Notificación de Copiado -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white dark:bg-emerald-500 dark:text-slate-950 px-4 py-2 rounded-full text-xs font-bold shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2">
+    <i data-lucide="check" class="w-4 h-4"></i>
+    <span>¡Producto copiado al portapapeles!</span>
+  </div>
+
   <header class="w-full glass-header border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
     <div class="max-w-2xl mx-auto px-4 py-3.5 sm:px-6">
       <div class="flex items-center justify-between gap-3">
         
         <div class="flex items-center gap-3">
-          <!-- Tu imagen oficial icon.png como logo -->
           <div class="w-11 h-11 rounded-2xl overflow-hidden shadow-md ring-1 ring-emerald-500/30 shrink-0 bg-slate-900">
             <img src="icon.png" alt="LawnSync Logo" class="w-full h-full object-cover">
           </div>
@@ -163,6 +168,18 @@
     const YEAR = hoy.getFullYear();
     let currentFilter = 'all';
     let store = {};
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('toast');
+        toast.classList.remove('opacity-0', 'pointer-events-none');
+        toast.classList.add('opacity-100');
+        setTimeout(() => {
+          toast.classList.remove('opacity-100');
+          toast.classList.add('opacity-0', 'pointer-events-none');
+        }, 2200);
+      });
+    }
 
     function toDate(m, d) { return new Date(YEAR, m-1, d); }
     function fmt(m, d) { return `${d} ${MESES[m]}`; }
@@ -344,6 +361,7 @@
         }
 
         const safeObj = JSON.stringify({ id: p.id, fase: p.fase, producto: p.producto, formula: p.formula, nota: p.nota, start: p.start, end: p.end }).replace(/"/g, '&quot;');
+        const safeProduct = p.producto.replace(/'/g, "\\'");
 
         card.innerHTML = `
           <div class="flex items-center justify-between gap-2 mb-2">
@@ -368,10 +386,19 @@
             ${p.fase}
           </h3>
 
-          <p class="text-sm font-semibold text-emerald-800 dark:text-emerald-300 mb-3 flex items-center gap-1.5">
-            <i data-lucide="package" class="w-4 h-4 shrink-0 text-emerald-600 dark:text-emerald-400"></i>
-            ${p.producto}
-          </p>
+          <!-- Botón de Copiar Producto -->
+          <button onclick="copyToClipboard('${safeProduct}')" class="w-full text-left group/copy mb-3 p-2 -ml-2 rounded-2xl hover:bg-emerald-50/80 dark:hover:bg-emerald-950/30 transition-all flex items-start justify-between gap-2 border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800/50">
+            <div class="flex items-start gap-2">
+              <i data-lucide="package" class="w-4 h-4 shrink-0 text-emerald-600 dark:text-emerald-400 mt-0.5"></i>
+              <span class="text-sm font-bold text-emerald-900 dark:text-emerald-200 leading-snug">
+                ${p.producto}
+              </span>
+            </div>
+            <span class="text-[10px] font-semibold text-slate-400 group-hover/copy:text-emerald-600 dark:group-hover/copy:text-emerald-400 flex items-center gap-1 shrink-0 bg-slate-100 dark:bg-slate-800 group-hover/copy:bg-emerald-100 dark:group-hover/copy:bg-emerald-900/60 px-2 py-1 rounded-lg transition-colors">
+              <i data-lucide="copy" class="w-3 h-3"></i>
+              <span class="hidden sm:inline">Copiar</span>
+            </span>
+          </button>
 
           <div class="flex flex-wrap gap-1.5 mb-3">
             <span class="px-2.5 py-1 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 font-mono text-xs font-semibold border border-emerald-200/60 dark:border-emerald-800/40">
